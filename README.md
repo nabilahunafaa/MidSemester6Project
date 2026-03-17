@@ -1,4 +1,4 @@
-# MyApp
+# AdminPanelTeam1
 
 A web-based admin panel and landing page built using Laravel and Blade templating. This project provides a simple dashboard structure with reusable components and a public landing page without authentication.
 
