@@ -6,7 +6,7 @@
 
 {{-- Hero --}}
 <section class="text-center py-20 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-    <h1 class="text-4xl font-bold mb-4">Welcome to MyApp</h1>
+    <h1 class="text-4xl font-bold mb-4">Welcome to AdminPanelTeam1</h1>
     <p class="mb-6">Simple solution for managing your business</p>
     <a href="{{ route('dashboard') }}" class="bg-white text-blue-600 px-6 py-3 rounded font-semibold">
         Get Started

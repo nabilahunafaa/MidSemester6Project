@@ -10,7 +10,7 @@
 
     {{-- Navbar --}}
     <nav class="flex justify-between items-center px-8 py-4 bg-white shadow">
-        <h1 class="font-bold text-lg">MyApp</h1>
+        <h1 class="font-bold text-lg">AdminPanelTeam1</h1>
         <div class="space-x-4">
             <a href="#features" class="hover:text-blue-500">Features</a>
             <a href="#about" class="hover:text-blue-500">About</a>
@@ -23,7 +23,7 @@
 
     {{-- Footer --}}
     <footer class="text-center py-6 bg-white mt-10 border-t">
-        <p class="text-sm text-gray-500">© 2026 MyApp</p>
+        <p class="text-sm text-gray-500">© 2026 AdminPanelTeam1</p>
     </footer>
 
 </body>
