@@ -1,7 +1,7 @@
 
-   <h1 class="text-3xl text-black pb-6">Dashboard</h1>
+<h1 class="text-3xl text-black pb-6 m-4">Dashboard</h1>
 
-<div class="flex flex-wrap mt-6">
+<div class="flex flex-wrap mt-6 m-4">
     <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
         <p class="text-xl pb-3 flex items-center">
             <i class="fas fa-plus mr-3"></i> Monthly Reports
@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div class="w-full mt-12">
+<div class="w-full mt-12 m-4">
     <p class="text-xl pb-3 flex items-center">
         <i class="fas fa-list mr-3"></i> Latest Reports
     </p>
@@ -28,22 +28,24 @@
         <table class="min-w-full bg-white">
             <thead class="bg-gray-800 text-white">
                 <tr>
-                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
-                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Last Name</th>
-                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
+                    <th class="w-1/7 text-left py-3 px-4 uppercase font-semibold text-sm">#</th>
+                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">First Name</th>
+                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Last Name</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700">
                 @foreach ($reports as $index => $report)
                 <tr class="{{ $index % 2 === 1 ? 'bg-gray-200' : '' }}">
-                    <td class="w-1/3 text-left py-3 px-4">{{ $report->name }}</td>
-                    <td class="w-1/3 text-left py-3 px-4">{{ $report->last_name }}</td>
+                    <td class="text-left py-3 px-4">{{ $index + 1 }}</td>
+                    <td class="w-1/3 text-left py-3 px-4">{{ $report->user->first_name }}</td>
+                    <td class="w-1/3 text-left py-3 px-4">{{ $report->user->last_name }}</td>
                     <td class="text-left py-3 px-4">
-                        <a class="hover:text-blue-500" href="tel:{{ $report->phone }}">{{ $report->phone }}</a>
+                        <a class="hover:text-blue-500" href="tel:{{ $report->user->phone_number }}">{{ $report->user->phone_number }}</a>
                     </td>
                     <td class="text-left py-3 px-4">
-                        <a class="hover:text-blue-500" href="mailto:{{ $report->email }}">{{ $report->email }}</a>
+                        <a class="hover:text-blue-500" href="mailto:{{ $report->user->email }}">{{ $report->user->email }}</a>
                     </td>
                 </tr>
                 @endforeach
@@ -53,52 +55,52 @@
 </div>
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.0/chart.min.js"></script>
 <script>
+    const monthlyLabels = @json($monthlyReports->pluck('month'));
+    const monthlyData = @json($monthlyReports->pluck('total'));
+
+    const resolvedLabels = @json($resolvedReports->pluck('month'));
+    const resolvedData = @json($resolvedReports->pluck('total'));
+
     var chartOne = document.getElementById('chartOne');
     new Chart(chartOne, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: monthlyLabels,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                label: 'Monthly Reports',
+                data: monthlyData,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             }]
         },
-        options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
     });
 
     var chartTwo = document.getElementById('chartTwo');
     new Chart(chartTwo, {
         type: 'line',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: resolvedLabels,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                label: 'Resolved Reports',
+                data: resolvedData,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
         },
-        options: { scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
     });
 </script>
 @endpush

@@ -1,23 +1,34 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\UserController;
+use App\Models\Report;
 
 Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/dashboard', function () {
-    return view('layouts/parts/dashboard');
-})->name('dashboard');
+// dashboard
+Route::get('/dashboard', [ReportController::class, 'index'])
+    ->name('dashboard');
 
-Route::get('/user', function () {
-    return view('layouts/parts/user');
-})->name('user');
+// user
+Route::get('/users', [UserController::class, 'index'])
+    ->name('users');
 
-Route::get('/product', function () {
-    return view('layouts/parts/product');
-})->name('product');
+Route::resource('users', UserController::class);
 
-Route::get('/product-category', function () {
-    return view('layouts/parts/product-category');
-})->name('product-category');
+// products
+Route::get('/product', [ProductController::class, 'index'])
+    ->name('product');
+
+Route::resource('products', ProductController::class);
+
+// product category
+Route::get('/product-category', [ProductCategoryController::class, 'index'])
+    ->name('categories');
+
+Route::resource('categories', ProductCategoryController::class);

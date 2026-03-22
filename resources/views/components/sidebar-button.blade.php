@@ -6,9 +6,9 @@
         $icon = 'fas fa-tachometer-alt mr-3';
         $destination = route('dashboard');
 
-    } elseif ($type == 'user') {
+    } elseif ($type == 'users') {
         $icon = 'fas fa-users mr-3';
-        $destination = route('user');
+        $destination = route('users.index');
 
     } elseif ($type == 'product') {
         $icon = 'fas fa-box mr-3';
@@ -16,7 +16,7 @@
 
     } elseif ($type == 'product-category') {
         $icon = 'fas fa-list mr-3';
-        $destination = route('product-category');
+        $destination = route('categories');
 
     }
 @endphp

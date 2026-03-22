@@ -1,13 +1,13 @@
-<h1 class="text-3xl text-black pb-6">Product Categories</h1>
+<h1 class="text-3xl text-black pb-6 m-4">Product Categories</h1>
 
-<div class="w-full mt-6">
+<div class="w-full mt-6 m-4">
     <div class="flex justify-between items-center pb-3">
         <p class="text-xl flex items-center">
             <i class="fas fa-tags mr-3"></i> All Categories
         </p>
-        <a href="{{ route('product-categories.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        {{-- <a href="{{ route('categories.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             <i class="fas fa-plus mr-2"></i> Add Category
-        </a>
+        </a> --}}
     </div>
 
     <div class="bg-white overflow-auto">
@@ -16,30 +16,30 @@
                 <tr>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">#</th>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Category Name</th>
-                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Slug</th>
+                    {{-- <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Slug</th>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Products</th>
-                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th> --}}
                 </tr>
             </thead>
             <tbody class="text-gray-700">
                 @forelse ($categories as $index => $category)
                 <tr class="{{ $index % 2 === 1 ? 'bg-gray-200' : '' }}">
                     <td class="text-left py-3 px-4">{{ $index + 1 }}</td>
-                    <td class="text-left py-3 px-4">{{ $category->name }}</td>
-                    <td class="text-left py-3 px-4">{{ $category->slug }}</td>
+                    <td class="text-left py-3 px-4">{{ $category->category_name }}</td>
+                    {{-- <td class="text-left py-3 px-4">{{ $category->slug }}</td>
                     <td class="text-left py-3 px-4">{{ $category->products_count ?? 0 }}</td>
                     <td class="text-left py-3 px-4 flex gap-2">
-                        <a href="{{ route('product-categories.edit', $category->id) }}" class="text-blue-500 hover:text-blue-700">
+                        <a href="{{ route('categories.edit', $category->id) }}" class="text-blue-500 hover:text-blue-700">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <form action="{{ route('product-categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Hapus kategori ini?')">
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Hapus kategori ini?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
-                    </td>
+                    </td> --}}
                 </tr>
                 @empty
                 <tr>
@@ -50,7 +50,7 @@
         </table>
     </div>
 
-    <div class="mt-4">
+    <div class="mt-4 flex justify-center">
         {{ $categories->links() }}
     </div>
 </div>
