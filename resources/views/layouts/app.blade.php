@@ -23,6 +23,7 @@
 </head>
 <body class="bg-gray-100 font-family-karla flex">
     {{-- =========================== HEADER =========================== --}}
+    @include('layouts.parts.header')
 
     {{-- =========================== SIDE BAR =========================== --}}
     @include('layouts.parts.side-bar')
@@ -33,6 +34,7 @@
     </div>
 
     {{-- =========================== FOOTER =========================== --}}
+    @include('layouts.parts.footer')
 </body>
 @stack('scripts')
 </html>
